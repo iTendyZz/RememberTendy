@@ -1,0 +1,77 @@
+@charset "UTF-8";
+
+@import url("./fonts.css");
+
+body{
+    overflow-x: hidden;
+    background-image: url("./img/body_background.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: bottom;
+    height: 100vh;
+}
+
+.my-container{
+    padding-left: 5%;
+    padding-right: 5%;
+    background-image: url("./img/Adventure_Time.webp");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position-y: center;
+}
+
+.profile{
+    border-radius: 35%;
+    border: 1 black solid;
+    height: 20px;
+    width: 200px;
+    margin-left: auto;
+    text-align: right;
+}
+
+.profile #icon{
+    width: 50px;
+    height: 50px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+}
+
+.my-navbar{
+    border: 1 black solid;
+    display: flex;
+    justify-content: start;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    margin-bottom: 10px;
+}
+
+.my-navbar-item{
+    display: flex;
+    font-family: "Montserrat";
+    text-decoration: none;
+    position: relative;
+    width: 100px;
+    height: 25px;
+    margin-right: 20px;
+    background-color: rgb(208, 161, 19);
+    border-radius: 20px;
+    justify-content: center;
+}
+
+.my-navbar-item a{
+    color: rgb(255, 255, 255);
+    text-decoration: none;
+    user-select: none;
+}
+
+.my-navbar-item a:hover{
+    color: white;
+}
+
+.my-navbar-item:hover{
+    transform: scale(1.1111);
+    transition: 0.34s;
+}
+
