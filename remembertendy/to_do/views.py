@@ -1,25 +1,33 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
 from django.contrib.auth.models import User
-from django.contrib.auth import login, authenticate
+from django.contrib.auth import login, authenticate, logout
 from django.db import IntegrityError
 from .models import *
 from django.core.exceptions import ObjectDoesNotExist
+from .forms import *
 
 # Create your views here.
 
 def index_page(request):
-    
+    form = PostForm()
     if request.user.is_authenticated:
         try:
+            works = ToDo.objects.filter(user=request.user).order_by("-create_date")
             get_avatar = MyUserAvatar.objects.get(user=request.user)
             return render(request, "to_do/index.html", context={
-            "avatar":get_avatar
+            "avatar":get_avatar,
+            "form":form,
+            "works":works
             })
         except ObjectDoesNotExist:
-            return render(request, "to_do/index.html")
+            return render(request, "to_do/index.html", context={
+                'form':form
+            })
     else:
-        return render(request, "to_do/index.html")
+        return render(request, "to_do/index.html", context={
+            'form': form
+        })
 
 
 def signup_user(request):
@@ -29,6 +37,8 @@ def signup_user(request):
         if request.POST['password1'] == request.POST['password2']:
             try:
                 user = User.objects.create_user(request.POST['username'], password=request.POST['password1'])
+                icon = MyUserAvatar.objects.create(user=user)
+                icon.save()
                 user.save()
                 login(request, user)
                 return redirect('homepage')
@@ -57,3 +67,19 @@ def signin_user(request):
         else:
             login(request, user)
             return redirect("homepage")
+
+
+def logout_user(request):
+    if request.method == "POST":
+        logout(request)
+        return redirect(to="homepage")
+
+
+def to_do_maker(request):
+    if request.method == "POST":
+        user_form = PostForm(request.POST, request.FILES)
+        if user_form.is_valid():
+            new_to_do = user_form.save(commit=False)
+            new_to_do.user = request.user
+            new_to_do.save()
+            return redirect(to="homepage")

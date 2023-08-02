@@ -10,6 +10,25 @@
     {% block head %}{% endblock head %}
 </head>
 <body>
+    <div class="toggle-navbar">
+        <div class="toggle-nav-items">
+            <div class="toggle-nav-user-info">
+                <h5>
+                    {{user.username}}
+                </h5>
+                <button style="background-image: url('{{avatar.icon.url}}')" class="prof-icon">
+                </button>
+            </div>
+            <div class="logout">
+                <form action="{% url 'logoutpage' %}" method="POST">
+                    {% csrf_token %}
+                    <button class="btn btn-danger">
+                        Logout
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
     <div class="my-container">
         <nav class="my-navbar">
             <div class="my-navbar-item">
@@ -25,15 +44,12 @@
             <div class="profile">
                 {% if user.is_authenticated %}
                     <div id="user">
-                        <h5>
-                            {{user.username}}
-                        </h5>
-                        <div style="background-image: url('{{avatar.icon.url}}')" id="icon">
+                        <button style="background-image: url('{{avatar.icon.url}}')" id="icon">
 
-                        </div>
+                        </button>
                     </div>
                 {% else %}
-                    <a href="{% url 'signinpage' %}" class="btn btn-success"> Sign in</a>
+                    <a href="{% url 'signinpage' %}" class="btn btn-success">Sign in</a>
                 {% endif %}
                 
             </div>
@@ -42,5 +58,8 @@
     <main class="container">
         {% block content %}{% endblock content %}
     </main>
+    <script src="{% static 'to_do/scripts/base.js' %}">
+    </script>
+    {% block scripts %}{% endblock scripts %}
 </body>
 </html>

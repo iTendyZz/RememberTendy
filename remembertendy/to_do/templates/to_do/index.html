@@ -8,4 +8,56 @@
 
 {% block content %}
 
+<div class="create-post">
+    <button class="cancel-creating-post">
+    </button>
+    <form action="{% url 'addtodo' %}" method="post" enctype="multipart/form-data">
+
+        {% csrf_token %}
+        <div class="form-title">
+            {{form.title.label}}
+            {{form.title}}
+        </div>
+        <div class="form-decription">
+            {{form.description.label}}
+            {{form.description}}
+        </div>
+        <div class="form-icon">
+            {{form.icon.label}}
+            {{form.icon}}
+        </div>
+        <div class="form-important">
+            {{form.important.label}}
+            {{form.important}}
+        </div>
+        <button class="btn btn-success submit-post">
+            Submit
+        </button>
+    </form>
+</div>
+
+<div class="row">
+      {% for work in works %}
+        <div class="col-4">
+          <div class="to-do">
+            <h3>{{work.title}}</h3>
+            {% if work.icon %}
+                <div class="to-do-icon" style="background-image: url('{{work.icon.url}}');"></div>
+            {% endif %}
+                <p>{{work.description|truncatechars:50}}</p>
+            </div>
+        </div>
+      {% endfor %}
+</div>
+
+
+<div class="add-post" style="background: url('{% static 'to_do/img/plus.png' %}');">
+    <button style="height: 100%; width: 100%; border: 0; background: 0;">
+    </button>
+</div>
 {% endblock content %}
+
+{% block scripts %}
+<script src="{% static 'to_do/scripts/index.js' %}">
+</script>
+{% endblock scripts %}

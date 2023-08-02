@@ -7,5 +7,7 @@ from django.conf import settings
 urlpatterns = [
     path('', views.index_page, name='homepage'),
     path('signup/', views.signup_user, name='signuppage'),
-    path('signin/', views.signin_user, name="signinpage")
+    path('signin/', views.signin_user, name="signinpage"),
+    path('logout/', views.logout_user, name="logoutpage"),
+    path('to-do/add/', views.to_do_maker, name='addtodo')
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -11,6 +11,63 @@ body{
     height: 100vh;
 }
 
+.toggle-navbar{
+    display: none;
+    width: 20%;
+    height: 300px;
+    background-color: rgb(208, 161, 19);
+    position: absolute;
+    right: 0;
+    z-index: 99;
+    justify-content: end;
+    transform: translateX(100%);
+}
+
+.toggle-navbar-active{
+    display: flex;
+    transform: translateX(0);
+    transition: 0.5s;
+}
+
+.toggle-nav-user-info{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.toggle-nav-items{
+    display: flex;
+    width: 100%;
+    justify-content: end;
+    align-items: flex-start;
+}
+
+.logout{
+    width: 100%;
+    bottom: 0;
+    position: absolute;
+}
+
+.logout button{
+    width: 100%;
+    justify-self: center;
+
+}
+
+.prof-icon{
+    width: 50px;
+    height: 50px;
+    background-position: center center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    position: relative;
+    margin-left: 20px;
+    border: 0;
+    border-radius: 50%;
+    position: relative;
+    right: 10px;
+}
+
 .my-container{
     padding-left: 5%;
     padding-right: 5%;
@@ -21,13 +78,16 @@ body{
 }
 
 .profile{
+    display: flex;
     border-radius: 35%;
     border: 1 black solid;
-    height: 20px;
+    height: 40px;
     width: 200px;
     margin-left: auto;
     text-align: right;
+    justify-content: end;
 }
+
 
 .profile #icon{
     width: 50px;
@@ -36,6 +96,9 @@ body{
     background-size: cover;
     background-repeat: no-repeat;
     position: relative;
+    margin-left: 20px;
+    border: 0;
+    border-radius: 50%;
 }
 
 .my-navbar{
@@ -75,3 +138,9 @@ body{
     transition: 0.34s;
 }
 
+#user{
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: space-around;
+    align-items: center;
+}
